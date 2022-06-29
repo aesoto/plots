@@ -1,0 +1,53 @@
+
+library(readr)
+library(ggplot2)
+
+df <- read_csv("AndresSoto/weights.txt")
+
+
+p <- ggplot(df, aes(x=ticker, y=weight)) + 
+  geom_boxplot()
+p
+# Rotate the box plot
+ggplot(df, aes(x=ticker, y=weight, fill = ticker)) + 
+  labs(fill='') +
+  geom_boxplot() +
+  theme_minimal()+
+  xlab("Ticker") +
+  ylab("Weight") +
+  guides(fill = guide_legend(ncol = 3))+
+  theme(legend.position = "right")+
+  theme(plot.margin=unit(c(1,1,1,1), 'cm'))+
+  theme(axis.text.x = element_text(angle = 65, size = 7)) +
+  theme(axis.text.x = element_text(vjust= 0.5)) +
+  theme(axis.text.y = element_text(size= 7)) +
+  theme(axis.title.x = element_text(size = 16))+
+  theme(axis.title.x = element_text(vjust= -2.5)) +
+  theme(axis.title.y = element_text(size = 16, vjust= 6.5))+
+  theme(legend.text=element_text(size=8))+
+  theme( panel.border = element_rect(colour = "black", fill=NA, size=0.51))
+
+
+df2 <- df[order(df$weight),]
+
+x=reorder(carrier,speed)
+
+ggplot(df2, aes(x=reorder(ticker, -weight), y=weight, fill = ticker)) + 
+  labs(fill='') +
+  geom_boxplot() +
+  theme_minimal()+
+  xlab("Ticker") +
+  ylab("Weight") +
+  guides(fill = guide_legend(ncol = 3))+
+  theme(legend.position = "right")+
+  theme(plot.margin=unit(c(1,1,1,1), 'cm'))+
+  theme(axis.text.x = element_text(angle = 65, size = 7)) +
+  theme(axis.text.x = element_text(vjust= 0.5)) +
+  theme(axis.text.y = element_text(size= 7)) +
+  theme(axis.title.x = element_text(size = 16))+
+  theme(axis.title.x = element_text(vjust= -2.5)) +
+  theme(axis.title.y = element_text(size = 16, vjust= 6.5))+
+  theme(legend.text=element_text(size=8))+
+  theme( panel.border = element_rect(colour = "black", fill=NA, size=0.51))
+
+  
